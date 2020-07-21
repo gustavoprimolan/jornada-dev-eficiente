@@ -1,6 +1,7 @@
 package br.com.casadocodigo.forms;
 
 
+import br.com.casadocodigo.constraints.UniqueEmail;
 import br.com.casadocodigo.entities.Autor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class AutorForm {
 
+    @UniqueEmail()
     @Email @NotNull @NotEmpty
     private String email;
     @NotNull @NotEmpty

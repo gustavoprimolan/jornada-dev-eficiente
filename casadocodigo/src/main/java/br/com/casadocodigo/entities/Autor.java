@@ -21,7 +21,7 @@ public class Autor {
     private LocalDateTime instante;
 
     @Email
-    @Column(name="email", nullable = false)
+    @Column(name="email", nullable = false, unique = true)
     private String email;
 
     @Column(name="nome", nullable = false)
