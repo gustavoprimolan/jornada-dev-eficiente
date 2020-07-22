@@ -23,4 +23,5 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
         query.setParameter("email", email);
         return CollectionUtils.isEmpty(query.getResultList());
     }
+
 }

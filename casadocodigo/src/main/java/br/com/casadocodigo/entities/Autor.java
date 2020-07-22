@@ -40,4 +40,5 @@ public class Autor {
     public AutorDto toDto() {
         return new AutorDto(this.id, this.instante, this.email, this.nome, this.descricao);
     }
+
 }

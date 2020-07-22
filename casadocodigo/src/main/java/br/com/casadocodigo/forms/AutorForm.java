@@ -15,8 +15,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class AutorForm {
 
-    @UniqueEmail()
-    @Email @NotNull @NotEmpty
+    @Email @NotNull @NotEmpty @UniqueEmail
     private String email;
     @NotNull @NotEmpty
     private String nome;
