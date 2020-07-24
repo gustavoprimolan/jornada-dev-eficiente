@@ -5,14 +5,15 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+//0
 @AllArgsConstructor
 @Getter
-public class AutorDto {
+public class AuthorDto {
 
     private Long id;
-    private LocalDateTime instante;
+    private LocalDateTime instant;
     private String email;
-    private String nome;
-    private String descricao;
+    private String name;
+    private String description;
 
 }

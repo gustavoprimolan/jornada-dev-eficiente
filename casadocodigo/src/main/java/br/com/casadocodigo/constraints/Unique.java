@@ -1,6 +1,6 @@
 package br.com.casadocodigo.constraints;
 
-import br.com.casadocodigo.constraints.validators.UniqueEmailValidator;
+import br.com.casadocodigo.constraints.validators.UniqueValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -12,10 +12,12 @@ import java.lang.annotation.Target;
 
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueEmailValidator.class)
-public @interface UniqueEmail {
+@Constraint(validatedBy = UniqueValidator.class)
+public @interface Unique {
 
-    String message() default "Email deve ser único";
+    String message() default "Must be unique";
+    Class<?> entityClass();
+    String entityField();
     Class<?>[] groups() default { };
     Class<? extends Payload>[] payload() default { };
 }
