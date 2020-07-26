@@ -13,8 +13,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
-@Getter
 @Setter
+@Getter
 public class AuthorForm {
 
     @Unique(entityClass = Author.class, entityField = "email")
@@ -24,6 +24,8 @@ public class AuthorForm {
     private String name;
     @NotNull @NotEmpty @Length(min = 1, max = 400)
     private String description;
+
+    private AuthorForm(){}
 
     public Author toEntity() {
         return new Author(this.email, this.name, this.description);

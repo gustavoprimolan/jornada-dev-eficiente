@@ -17,6 +17,8 @@ public class CategoryForm {
     @NotEmpty @NotNull
     private String name;
 
+    private CategoryForm() {}
+
     public Category toEntity() {
         return new Category(this.name);
     }

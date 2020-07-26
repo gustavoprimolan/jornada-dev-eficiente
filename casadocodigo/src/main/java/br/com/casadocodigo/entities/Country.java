@@ -1,6 +1,6 @@
 package br.com.casadocodigo.entities;
 
-import br.com.casadocodigo.dtos.CategoryDto;
+import br.com.casadocodigo.dtos.CountryDto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,25 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Category")
-public class Category {
+@Table(name = "Country")
+public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Deprecated
-    protected Category() {}
+    protected Country(){}
 
-    public Category(String name) {
+    public Country(String name) {
         this.name = name;
     }
 
-    public CategoryDto toDto() {
-        return new CategoryDto(this.id, this.name);
+    public CountryDto toDto() {
+        return new CountryDto(this.id, this.name);
     }
 
 }

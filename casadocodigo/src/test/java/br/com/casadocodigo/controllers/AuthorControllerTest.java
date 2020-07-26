@@ -3,6 +3,7 @@ package br.com.casadocodigo.controllers;
 import br.com.casadocodigo.dtos.AuthorDto;
 import br.com.casadocodigo.dtos.ErrorDto;
 import br.com.casadocodigo.forms.AuthorForm;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +29,7 @@ class AuthorControllerTest {
         uri = "http://localhost:" + port;
     }
 
+    @DisplayName("Given a valid author, when making a post request to author endpoint, then return created (201) and the object created")
     @Test
     void givenAValidAuthor_whenMakingPostRequestToAuthorEndpoint_thenReturnCreatedAndTheObject() {
         AuthorForm request = new AuthorForm("teste@teste.com", "name", "description");

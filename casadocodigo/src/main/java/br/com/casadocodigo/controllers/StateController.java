@@ -1,8 +1,8 @@
 package br.com.casadocodigo.controllers;
 
-import br.com.casadocodigo.dtos.CategoryDto;
-import br.com.casadocodigo.entities.Category;
-import br.com.casadocodigo.forms.CategoryForm;
+import br.com.casadocodigo.dtos.StateDto;
+import br.com.casadocodigo.entities.State;
+import br.com.casadocodigo.forms.StateForm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,21 +15,21 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/categories")
-public class CategoryController {
+@RequestMapping("states")
+public class StateController {
 
     private final EntityManager entityManager;
 
-    public CategoryController(EntityManager entityManager) {
+    public StateController(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Transactional
     @PostMapping
-    public ResponseEntity<CategoryDto> save(@Valid @RequestBody CategoryForm form) {
-        Category category = form.toEntity();
-        entityManager.persist(category);
-        return ResponseEntity.status(HttpStatus.CREATED).body(category.toDto());
+    public ResponseEntity<StateDto> save(@Valid @RequestBody StateForm form) {
+        State state = form.toEntity(entityManager);
+        entityManager.persist(state);
+        return ResponseEntity.status(HttpStatus.CREATED).body(state.toDto());
     }
 
 }
