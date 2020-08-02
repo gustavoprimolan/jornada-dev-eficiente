@@ -6,8 +6,8 @@ public class ResourceNotFoundException extends RuntimeException {
         super("Resource not found!");
     }
 
-    public ResourceNotFoundException(String country, Long countryId) {
-        super("Resource " + country + " with identifier " + countryId + " not found!");
+    public ResourceNotFoundException(String resourceName, Long resourceIdentifier) {
+        super("Resource " + resourceName + " with identifier " + resourceIdentifier + " not found!");
     }
 
 }

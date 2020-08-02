@@ -37,4 +37,12 @@ public class State {
     public StateDto toDto() {
         return new StateDto(this.id, this.name, this.country.toDto());
     }
+
+    public boolean isCountryIdEquals(Long countryId) {
+        return this.country.isIdEquals(countryId);
+    }
+
+    public Country getCountry() {
+        return country;
+    }
 }

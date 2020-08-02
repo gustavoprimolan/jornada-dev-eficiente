@@ -27,9 +27,9 @@ public class PurchaseController {
     @Transactional
     @PostMapping
     public ResponseEntity<PurchaseDto> save(@Valid @RequestBody PurchaseForm form) {
-//        Purchase purchase = form.toEntity(entityManager);
-//        entityManager.persist(purchase);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(purchase.toDto());
+        Purchase purchase = form.toEntity(entityManager);
+        entityManager.persist(purchase);
+        return ResponseEntity.status(HttpStatus.CREATED).body(purchase.toDto());
     }
 
 }

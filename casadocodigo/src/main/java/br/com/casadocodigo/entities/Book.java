@@ -74,6 +74,10 @@ public class Book {
                 .build();
     }
 
+    public BigDecimal getPrice() {
+        return this.price;
+    }
+
     public static final class Builder {
 
         private Builder() {
