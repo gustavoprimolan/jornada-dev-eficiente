@@ -5,6 +5,7 @@ import br.com.casadocodigo.constraints.Unique;
 import br.com.casadocodigo.entities.Author;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
@@ -13,8 +14,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
-@Setter
+@NoArgsConstructor
 @Getter
+@Setter
 public class AuthorForm {
 
     @Unique(entityClass = Author.class, entityField = "email")
@@ -24,8 +26,6 @@ public class AuthorForm {
     private String name;
     @NotNull @NotEmpty @Length(min = 1, max = 400)
     private String description;
-
-    private AuthorForm(){}
 
     public Author toEntity() {
         return new Author(this.email, this.name, this.description);

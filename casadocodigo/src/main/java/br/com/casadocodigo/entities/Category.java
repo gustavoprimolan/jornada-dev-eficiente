@@ -20,6 +20,9 @@ public class Category {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
+    /**      
+     * @deprecated (it is not recommended build an empty object, but jpa needs this guy... =/)      
+     * */
     @Deprecated
     protected Category() {}
 

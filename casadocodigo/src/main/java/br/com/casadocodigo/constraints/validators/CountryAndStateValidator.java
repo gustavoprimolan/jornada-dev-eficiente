@@ -20,8 +20,9 @@ public class CountryAndStateValidator implements ConstraintValidator<CountryAndS
     public boolean isValid(PurchaseForm purchase, ConstraintValidatorContext context) {
         if(!purchase.isStateIdNull()) return true;
 
-        Query query = entityManager.createQuery("SELECT CASE WHEN (count(s) > 0) THEN true ELSE false END FROM State AS s WHERE s.country.id = : countryId");
+        Query query = entityManager.createQuery("SELECT CASE WHEN (count(s) > 0) THEN true ELSE false END FROM State AS s WHERE s.country.id = : countryId AND s.id = :stateId");
         query.setParameter("countryId", purchase.getCountryId());
+        query.setParameter("stateId", purchase.getStateId());
         Boolean areThereStates = (Boolean) query.getSingleResult();
 
         return !areThereStates;

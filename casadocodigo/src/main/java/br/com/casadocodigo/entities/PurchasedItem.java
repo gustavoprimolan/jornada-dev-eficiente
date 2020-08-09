@@ -2,12 +2,14 @@ package br.com.casadocodigo.entities;
 
 import br.com.casadocodigo.dtos.PurchasedItemDto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
@@ -27,7 +29,9 @@ public class PurchasedItem {
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    @OneToOne
+    private BigDecimal price;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "purchase_id", nullable = false)
     private Purchase purchase;
 
@@ -40,6 +44,7 @@ public class PurchasedItem {
     public PurchasedItem(int quantity, Book book, Purchase purchase) {
         this.quantity = quantity;
         this.book = book;
+        this.price = this.book.getPrice();
         this.purchase = purchase;
     }
 
@@ -47,7 +52,8 @@ public class PurchasedItem {
         return new PurchasedItemDto(this.book.toDto(), this.quantity);
     }
 
-    public BigDecimal sumBookPriceWithQuantity() {
-        return this.book.getPrice().multiply(BigDecimal.valueOf(quantity));
+    public BigDecimal sumItemPriceWithQuantity() {
+        return this.price.multiply(BigDecimal.valueOf(quantity));
     }
+
 }

@@ -3,13 +3,15 @@ package br.com.casadocodigo.forms;
 import br.com.casadocodigo.entities.Book;
 import br.com.casadocodigo.entities.Purchase;
 import br.com.casadocodigo.entities.PurchasedItem;
+import lombok.Setter;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.function.Function;
 
-public class ItemForm {
+@Setter
+public class PurchaseItemForm {
 
     @NotNull
     private Long bookId;

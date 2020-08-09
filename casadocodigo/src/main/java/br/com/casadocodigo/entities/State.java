@@ -26,6 +26,9 @@ public class State {
     @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
     private Country country;
 
+    /**      
+     * @deprecated (it is not recommended build an empty object, but jpa needs this guy... =/)      
+     * */
     @Deprecated
     protected State() {}
 
@@ -45,4 +48,5 @@ public class State {
     public Country getCountry() {
         return country;
     }
+
 }

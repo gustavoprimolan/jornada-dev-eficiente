@@ -8,8 +8,8 @@ INSERT INTO Category (id, name) VALUES
     (2, 'Ficção Científica');
 
 INSERT INTO Book (id, title, summary, preface, price, page_number, isbn, publication_date, autor_id, category_id) VALUES
-    (1, 'Star Wars', 'Um jovem Jedi ataca novamente', 'Star Wars preface', 50.99, 253, 'isbn01', NOW()+50, 1, 2),
-    (2, 'Driven Domain Design', 'Design de código', 'DD preface', 20.99, 560, 'isbn02', NOW()+20, 2, 1);
+    (1, 'Star Wars', 'Um jovem Jedi ataca novamente', 'Star Wars preface', 50.00, 253, 'isbn01', NOW()+50, 1, 2),
+    (2, 'Driven Domain Design', 'Design de código', 'DD preface', 20.00, 560, 'isbn02', NOW()+20, 2, 1);
 
 
 INSERT INTO Country(id, name) VALUES
@@ -24,7 +24,9 @@ INSERT INTO State(id, name, country_id) VALUES
     (4, 'Maryland', 2);
 
 
-INSERT INTO Purchase(id, email, name, last_name, cpf_cnpj, address, complement, city, phone, cep, totalPrice, country_id, state_id) VALUES
-    (1, 'jose.legal@legalzin.com', 'José', 'Legalzin', '12345678912', 'Rua dos Alfenetes', '144', 'Cidade das Pitangas', '5531945644784', '38567900', 1, 1);
+INSERT INTO Purchase (id, email, name, last_name, cpf_cnpj, address, complement, city, phone, cep, total_price, country_id, state_id) VALUES
+    (1, 'jose.legal@legalzin.com', 'José', 'Legalzin', '12345678912', 'Rua dos Alfenetes', '144', 'Cidade das Pitangas', '5531945644784', '38567900', 140.00 , 1, 1);
 
-INSERT INTO PurchasedItem(id, quantity, book_id, purchase_id)
+INSERT INTO PurchasedItem (id, quantity, book_id, purchase_id) VALUES
+    (1, 2, 2, 1),
+    (2, 2, 1, 1);

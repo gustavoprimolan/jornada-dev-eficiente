@@ -11,18 +11,8 @@ import java.util.Set;
 public class PurchaseDto {
 
     private Long id;
-    private String email;
-    private String name;
-    private String lastName;
-    private String cpfCnpj;
-    private String address;
-    private String complement;
-    private String city;
-    private String phone;
-    private String cep;
+    private CustomerDto customer;
     private BigDecimal totalPrice;
-    private CountryDto country;
-    private StateDto state;
     private Set<PurchasedItemDto> purchasedItems;
 
 }

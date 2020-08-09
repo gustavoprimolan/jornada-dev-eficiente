@@ -1,7 +1,6 @@
 package br.com.casadocodigo.entities;
 
 import br.com.casadocodigo.dtos.AuthorDto;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +11,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 
-//CARGA INTRÍNSECA 1
-@NoArgsConstructor
 @Entity
 @Table(name = "Author")
 public class Author {
@@ -34,6 +31,12 @@ public class Author {
 
     @Column(name="description", nullable = false, length = 400)
     private String description;
+
+    /**      
+     * @deprecated (it is not recommended build an empty object, but jpa needs this guy... =/)      
+     * */
+    @Deprecated
+    public Author() {}
 
     public Author(String email, String nome, String descricao) {
         this.instant = LocalDateTime.now();

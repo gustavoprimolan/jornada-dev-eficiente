@@ -4,9 +4,9 @@ import br.com.casadocodigo.constraints.Unique;
 import br.com.casadocodigo.entities.Author;
 import br.com.casadocodigo.entities.Book;
 import br.com.casadocodigo.entities.Category;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.Future;
@@ -33,7 +33,7 @@ public class BookForm {
     @NotNull @NotBlank
     private String isbn;
     @Future
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate publicationDate;
     @NotNull
     private Long authorId;

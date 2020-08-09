@@ -57,6 +57,9 @@ public class Book {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    /**      
+     * @deprecated (it is not recommended build an empty object, but jpa needs this guy... =/)      
+     * */
     @Deprecated
     Book() {}
 

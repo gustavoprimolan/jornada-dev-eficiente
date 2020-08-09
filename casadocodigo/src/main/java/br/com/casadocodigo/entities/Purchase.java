@@ -2,15 +2,14 @@ package br.com.casadocodigo.entities;
 
 import br.com.casadocodigo.dtos.PurchaseDto;
 import br.com.casadocodigo.dtos.PurchasedItemDto;
-import br.com.casadocodigo.exceptions.InvalidTotalPriceException;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.math.BigDecimal;
@@ -27,44 +26,14 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+    @Embedded
+    private Customer customer;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-
-    @Column(name = "cpf_cnpj", nullable = false)
-    private String cpfCnpj;
-
-    @Column(name="address", nullable = false)
-    private String address;
-
-    @Column(name = "complement", nullable = false)
-    private String complement;
-
-    @Column(name = "city", nullable = false)
-    private String city;
-
-    @Column(name = "phone", nullable = false)
-    private String phone;
-
-    @Column(name = "cep", nullable = false)
-    private String cep;
-
+    @Column(name="total_price", nullable = false)
     private BigDecimal totalPrice;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id", nullable = false)
-    private Country country;
 
-    @ManyToOne
-    @JoinColumn(name = "state_id")
-    private State state;
-
-    @OneToMany
+    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PurchasedItem> purchasedItems;
 
     /**      
@@ -73,38 +42,17 @@ public class Purchase {
     @Deprecated
     public Purchase() {}
 
-    public Purchase(String email, String name, String lastName,
-                    String cpfCnpj, String address, String complement,
-                    String city, String phone, String cep,
-                    BigDecimal totalPrice, Country country, State state,
-                    List<Function<Purchase, PurchasedItem>> functionPurchasedItems) {
-        this.email = email;
-        this.name = name;
-        this.lastName = lastName;
-        this.cpfCnpj = cpfCnpj;
-        this.address = address;
-        this.complement = complement;
-        this.city = city;
-        this.phone = phone;
-        this.cep = cep;
+    public Purchase(Customer customer, BigDecimal totalPrice, List<Function<Purchase, PurchasedItem>> functionPurchasedItems) {
+        this.customer = customer;
         this.totalPrice = totalPrice;
-        this.country = country;
-        this.state = state;
         this.purchasedItems = functionPurchasedItems.stream().map(function -> function.apply(this)).collect(Collectors.toSet());
+        BigDecimal totalPriceOfItems = this.purchasedItems.stream().map(PurchasedItem::sumItemPriceWithQuantity).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+        if(!totalPriceOfItems.equals(this.totalPrice)) throw new IllegalArgumentException("Purchase.total.invalid");
     }
 
     public PurchaseDto toDto() {
         Set<PurchasedItemDto> purchasedItemsDto = this.purchasedItems.stream().map(PurchasedItem::toDto).collect(Collectors.toSet());
-        return new PurchaseDto(this.id, this.email, this.name,
-                this.lastName, this.cpfCnpj , this.address,
-                this.complement, this.city, this.phone,
-                this.cep, this.totalPrice, this.country.toDto(),
-                this.state.toDto(), purchasedItemsDto);
-    }
-
-    public void validateTotalPriceWithTotalPriceOfBooks() {
-        BigDecimal totalPriceOfBooks = this.purchasedItems.stream().map(PurchasedItem::sumBookPriceWithQuantity).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
-        if(!totalPriceOfBooks.equals(this.totalPrice)) throw new InvalidTotalPriceException();
+        return new PurchaseDto(this.id, this.customer.toDto(), this.totalPrice, purchasedItemsDto);
     }
 
 }
