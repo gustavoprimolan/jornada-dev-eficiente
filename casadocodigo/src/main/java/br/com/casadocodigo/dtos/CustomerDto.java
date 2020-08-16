@@ -16,9 +16,6 @@ public class CustomerDto {
     private String city;
     private String phone;
     private String cep;
-    private CountryDto country;
     private StateDto state;
-
-
 
 }

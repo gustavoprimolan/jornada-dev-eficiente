@@ -56,8 +56,7 @@ public class Customer {
     public CustomerDto toDto() {
         return new CustomerDto(this.email, this.name, this.lastName,
                 this.cpfCnpj, this.address, this.complement,
-                this.city, this.phone, this.cep,
-                this.country.toDto(), this.state.toDto());
+                this.city, this.phone, this.cep, this.state.toDto());
     }
 
 }

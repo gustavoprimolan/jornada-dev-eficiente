@@ -2,7 +2,7 @@ package br.com.casadocodigo.forms;
 
 import br.com.casadocodigo.constraints.Unique;
 import br.com.casadocodigo.entities.Voucher;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Future;
@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Setter
+@AllArgsConstructor
 public class VoucherForm {
 
     @Unique(entityClass = Voucher.class, entityField = "code")

@@ -13,6 +13,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Voucher")
@@ -26,11 +27,11 @@ public class Voucher {
     public String code;
 
     @Min(0) @Max(100)
-    @Column(name = "percentual", nullable = false)
+    @Column(name = "discount_percentage", nullable = false)
     public BigDecimal discountPercentage;
 
     @Future
-    @Column(name = "validity", nullable = false)
+    @Column(name = "expiry_date", nullable = false)
     public LocalDate expiryDate;
 
     /**      
@@ -45,8 +46,21 @@ public class Voucher {
         this.expiryDate = expiryDate;
     }
 
+    public static void validateExpiration(Voucher voucher) {
+        if(Objects.isNull(voucher)) return;
+        voucher.validateExpiration();
+    }
+
     public VoucherDto toDto() {
         return new VoucherDto(this.id, this.code, this.discountPercentage, this.expiryDate);
+    }
+
+    public boolean isExpired() {
+        return LocalDate.now().isBefore(this.expiryDate);
+    }
+
+    public void validateExpiration() {
+        if(isExpired()) throw new IllegalArgumentException("Voucher.expiryDate.invalid");
     }
 
 }

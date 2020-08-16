@@ -5,6 +5,8 @@ import br.com.casadocodigo.entities.Purchase;
 import br.com.casadocodigo.forms.PurchaseForm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,12 @@ public class PurchaseController {
 
     public PurchaseController(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PurchaseDto> findById(@PathVariable Long id) {
+        Purchase purchase = entityManager.find(Purchase.class, id);
+        return ResponseEntity.ok(purchase.toDto());
     }
 
     @Transactional

@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "PurchasedItem")
@@ -46,6 +48,17 @@ public class PurchasedItem {
         this.book = book;
         this.price = this.book.getPrice();
         this.purchase = purchase;
+    }
+
+    public static BigDecimal calculateTotalPriceOfItems(Set<PurchasedItem> purchasedItems) {
+        return purchasedItems.stream()
+                .map(PurchasedItem::sumItemPriceWithQuantity)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
+    }
+
+    public static Set<PurchasedItemDto> toListDto(Set<PurchasedItem> purchasedItems) {
+        return purchasedItems.stream().map(PurchasedItem::toDto).collect(Collectors.toSet());
     }
 
     public PurchasedItemDto toDto() {

@@ -17,4 +17,9 @@ public class VoucherDto {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate expiryDate;
 
+    public BigDecimal discountFromValue(BigDecimal value) {
+        BigDecimal valueToDiscount = this.discountPercentage.divide(BigDecimal.valueOf(100)).multiply(value);
+        return value.subtract(valueToDiscount);
+    }
+
 }

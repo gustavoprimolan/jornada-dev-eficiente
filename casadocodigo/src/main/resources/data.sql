@@ -23,10 +23,16 @@ INSERT INTO State(id, name, country_id) VALUES
     (3, 'Iowa', 2),
     (4, 'Maryland', 2);
 
+INSERT INTO Voucher(id, code, discount_percentage, expiry_date) VALUES
+    (1, 'CODE1', 50.00, NOW()+10),
+    (2, 'CODE2', 20.00, NOW()-20);
 
-INSERT INTO Purchase (id, email, name, last_name, cpf_cnpj, address, complement, city, phone, cep, total_price, country_id, state_id) VALUES
-    (1, 'jose.legal@legalzin.com', 'José', 'Legalzin', '12345678912', 'Rua dos Alfenetes', '144', 'Cidade das Pitangas', '5531945644784', '38567900', 140.00 , 1, 1);
+INSERT INTO Purchase (id, email, name, last_name, cpf_cnpj, address, complement, city, phone, cep, total_price, country_id, state_id, voucher_id) VALUES
+    (1, 'jose.legal@legalzin.com', 'José', 'Legalzin', '12345678912', 'Rua dos Alfinetes', '144', 'Cidade das Pitangas', '5531945644784', '38567900', 140.00 , 1, 1, 1),
+    (2, 'gustavo.legal@chatin.com', 'Gustavo', 'Chatin', '12123779912', 'Rua da Jovem Pan', '144', 'Margarida City', '233798546054', '4451122', 190.00 , 1, 1, 1);
 
 INSERT INTO PurchasedItem (id, quantity, book_id, purchase_id) VALUES
     (1, 2, 2, 1),
-    (2, 2, 1, 1);
+    (2, 2, 1, 1),
+    (3, 2, 2, 2),
+    (4, 3, 1, 2);
